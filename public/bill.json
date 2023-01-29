@@ -1,0 +1,35 @@
+[
+  {
+    "fullName": "Sherry Mathis",
+      "email": "weaver@gmail.com",
+             "phone": "01457552455",
+             "bill" : 500
+  },
+  {
+    "fullName": "Weaver Spencer",
+        "email": "weaver@gmail.com",
+         "phone": "01457552455",
+   "bill" : 635
+  },
+  {
+    "fullName": "Benita Mclean",
+    "email": "weaver@gmail.com",
+        "phone": "01457552455",
+           "bill" : 987
+  },
+  {
+    "fullName": "Francesca Ward",
+    "email": "weaver@gmail.com",    "phone": "01457552455",    "bill" : 800
+
+  },
+  {
+    "fullName": "Michele Pena",
+    "email": "weaver@gmail.com",     "phone": "01457552455",    "bill" : 300
+
+  },
+  {
+    "fullName": "Carolyn Abbott",
+    "email": "weaver@gmail.com",     "phone": "01457552455",    "bill" : 5300
+
+  }
+]
