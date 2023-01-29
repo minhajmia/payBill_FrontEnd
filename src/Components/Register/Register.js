@@ -1,5 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "react-hot-toast";
+import { Link, useNavigate } from "react-router-dom";
 
 const Register = () => {
   const {
@@ -8,9 +10,28 @@ const Register = () => {
     formState: { errors },
   } = useForm();
 
+  const navigate = useNavigate();
+
   // Register
   const handleRegister = (data) => {
-    console.log(data);
+    const name = data.name;
+    const email = data.email;
+    const user = { name, email };
+    fetch("http://localhost:5000/api/registration", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(user),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.acknowledged) {
+          toast.success("Registration Successful");
+          navigate("/");
+        }
+      });
   };
 
   return (
@@ -74,6 +95,12 @@ const Register = () => {
           <div className="form-control mt-6">
             <button className="btn">Register</button>
           </div>
+          <p className="text-center">
+            Already have an account?
+            <Link to="/login" className="font-bold italic underline">
+              Login
+            </Link>{" "}
+          </p>
         </form>
       </div>
     </div>

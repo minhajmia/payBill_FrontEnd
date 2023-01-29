@@ -1,5 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   const {
@@ -56,6 +57,12 @@ const Login = () => {
           <div className="form-control mt-6">
             <button className="btn">Login</button>
           </div>
+          <p className="text-center">
+            New User?
+            <Link to="/register" className="font-bold italic underline">
+              Register
+            </Link>{" "}
+          </p>
         </form>
       </div>
     </div>

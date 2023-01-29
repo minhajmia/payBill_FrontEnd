@@ -1,19 +1,29 @@
 import React from "react";
 
-const BillingList = ({ bill: singleBill, ind }) => {
+const BillingList = ({ bill: singleBill, ind, refetch }) => {
   const { fullName, phone, email, amount } = singleBill;
 
   // Delete Bill
-  const handleDelete = (billID) => {
-    console.log(billID);
-    fetch(`/api/deleteBilling/${billID}`, {
-      method: "DELETE",
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        alert("Delete Successful");
-      });
+  const handleDelete = (id) => {
+    const proceed = window.confirm("Are you sure you want to delete?");
+    if (proceed) {
+      fetch(`http://localhost:5000/api/delete-billing/${id}`, {
+        method: "DELETE",
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          if (data.deletedCount > 0) {
+            alert("Delete Successful");
+            refetch();
+          }
+        });
+    }
+  };
+
+  // Update Bill
+  const handleUpdate = (id) => {
+    console.log(id);
   };
   return (
     <>
@@ -24,7 +34,7 @@ const BillingList = ({ bill: singleBill, ind }) => {
         <td>{phone}</td>
         <td>{amount}</td>
         <td>
-          <button>Edit</button> |{" "}
+          <button onClick={() => handleUpdate(singleBill._id)}>Edit</button> |{" "}
           <button onClick={() => handleDelete(singleBill._id)}>Delete</button>{" "}
         </td>
       </tr>

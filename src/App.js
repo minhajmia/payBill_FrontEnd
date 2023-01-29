@@ -5,6 +5,7 @@ import NotFound from "./Components/NotFound/NotFound";
 import Main from "./Layout/Main";
 import Login from "./Components/Login/Login";
 import Register from "./Components/Register/Register";
+import toast, { Toaster } from "react-hot-toast";
 
 function App() {
   const router = createBrowserRouter([
@@ -21,7 +22,9 @@ function App() {
   ]);
   return (
     <div className="">
-      <RouterProvider router={router}></RouterProvider>
+      <RouterProvider router={router}>
+        <Toaster />
+      </RouterProvider>
     </div>
   );
 }

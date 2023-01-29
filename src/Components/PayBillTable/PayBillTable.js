@@ -4,14 +4,13 @@ import BilingModal from "../BilingModal/BilingModal";
 import BillingList from "../BillingList/BillingList";
 
 const PayBillTable = () => {
-  const { data: billingList = [] } = useQuery({
+  const { data: billingList = [], refetch } = useQuery({
     queryKey: ["/api/billing-list"],
     queryFn: () =>
       fetch("http://localhost:5000/api/billing-list").then((response) =>
         response.json()
       ),
   });
-  console.log(billingList);
   return (
     <div>
       <div className="flex justify-between items-center mx-12 border-1 p-2 mt-20 rounded-sm bg-slate-100">
@@ -54,7 +53,12 @@ const PayBillTable = () => {
             </thead>
             <tbody>
               {billingList.map((singleBill, ind) => (
-                <BillingList bill={singleBill} key={singleBill._id} ind={ind} />
+                <BillingList
+                  bill={singleBill}
+                  key={singleBill._id}
+                  ind={ind}
+                  refetch={refetch}
+                />
               ))}
             </tbody>
           </table>
