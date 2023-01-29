@@ -1,7 +1,17 @@
+import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import BilingModal from "../BilingModal/BilingModal";
+import BillingList from "../BillingList/BillingList";
 
 const PayBillTable = () => {
+  const { data: billingList = [] } = useQuery({
+    queryKey: ["/api/billing-list"],
+    queryFn: () =>
+      fetch("http://localhost:5000/api/billing-list").then((response) =>
+        response.json()
+      ),
+  });
+  console.log(billingList);
   return (
     <div>
       <div className="flex justify-between items-center mx-12 border-1 p-2 mt-20 rounded-sm bg-slate-100">
@@ -43,16 +53,9 @@ const PayBillTable = () => {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <th>1</th>
-                <td>Cy Ganderton</td>
-                <td>minhaj@gmail.com</td>
-                <td>012475455554</td>
-                <td>2000</td>
-                <td>
-                  <button>Edit</button> | <button>Delete</button>{" "}
-                </td>
-              </tr>
+              {billingList.map((singleBill, ind) => (
+                <BillingList bill={singleBill} key={singleBill._id} ind={ind} />
+              ))}
             </tbody>
           </table>
         </div>
