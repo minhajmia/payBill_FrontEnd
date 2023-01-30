@@ -4,26 +4,24 @@ import { Link, useNavigate } from "react-router-dom";
 
 export const UserContext = createContext();
 const Login = () => {
-  const [user, setUser] = useState(false);
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  console.log(user);
   const navigate = useNavigate();
 
   // Login
   const handleLogin = (data) => {
     const email = data.email;
-    fetch(`http://localhost:5000/api/login?email=${email}`)
+    fetch(`https://backend-xi-wine.vercel.app/api/login?email=${email}`)
       .then((res) => res.json())
       .then((data) => {
-        if (!data?.email) {
-          alert("Please Register");
+        if (data?.email) {
+          alert("Login Successful");
+          navigate("/h");
         }
-        setUser(true);
       })
       .catch((err) => {
         alert(`${err.message} . Please Register `);
@@ -70,7 +68,7 @@ const Login = () => {
             )}
           </div>
           <div className="form-control mt-6">
-            <button className="btn">Login</button>
+            <button className="btn bg-base-400">Login</button>
           </div>
           <p className="text-center">
             New User?

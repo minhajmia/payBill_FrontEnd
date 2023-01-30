@@ -12,7 +12,7 @@ const BilingModal = () => {
   // Submit pay bill form
   const payBillSubmit = (data) => {
     setPayError("");
-    fetch("http://localhost:5000/api/add-billing", {
+    fetch("https://backend-xi-wine.vercel.app/api/add-billing", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

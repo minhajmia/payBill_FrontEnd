@@ -13,7 +13,7 @@ const PayBillTable = () => {
     queryKey: ["/api/billing-list"],
     queryFn: () =>
       fetch(
-        `http://localhost:5000/api/billing-list?page=${page}$size=${size}`
+        `https://backend-xi-wine.vercel.app/api/billing-list?page=${page}$size=${size}`
       ).then((response) => response.json()),
   });
 
@@ -88,7 +88,7 @@ const PayBillTable = () => {
                   }`}
                   onClick={() => setPage(number)}
                 >
-                  {number}
+                  {number + 1}
                 </button>
               ))}
             <select onChange={(event) => setSize(event.target.value)}>

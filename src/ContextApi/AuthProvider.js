@@ -5,7 +5,7 @@ export const AuthContext = createContext();
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(false);
   useEffect((email) => {
-    fetch(`http://localhost:5000/api/login?email=${email}`)
+    fetch(`https://backend-xi-wine.vercel.app/api/login?email=${email}`)
       .then((response) => response.json())
       .then((data) => {
         console.log(data);

@@ -17,7 +17,7 @@ const Register = () => {
     const name = data.name;
     const email = data.email;
     const user = { name, email };
-    fetch("http://localhost:5000/api/registration", {
+    fetch("https://backend-xi-wine.vercel.app/api/registration", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -93,7 +93,7 @@ const Register = () => {
             )}
           </div>
           <div className="form-control mt-6">
-            <button className="btn">Register</button>
+            <button className="btn bg-base-400">Register</button>
           </div>
           <p className="text-center">
             Already have an account?

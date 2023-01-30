@@ -65,10 +65,10 @@ const Header = () => {
         <p>Paid Amount: 0</p>
         <p>{name}</p>
         <Link to="/login">
-          <button className="btn mx-2">Login</button>
+          <button className="btn mx-2 bg-base-400">Login</button>
         </Link>
         <Link to="/register">
-          <button className="btn">Register</button>
+          <button className="btn bg-base-400">Register</button>
         </Link>
       </div>
     </div>
