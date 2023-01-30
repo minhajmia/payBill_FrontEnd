@@ -1,16 +1,32 @@
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import BilingModal from "../BilingModal/BilingModal";
 import BillingList from "../BillingList/BillingList";
+import "./PayBillTable.css";
 
 const PayBillTable = () => {
-  const { data: billingList = [], refetch } = useQuery({
+  const [bill, setBill] = useState([]);
+  const [billCount, setBillCount] = useState(0);
+  const [page, setPage] = useState(0);
+  const [size, setSize] = useState(10);
+  const { data, refetch } = useQuery({
     queryKey: ["/api/billing-list"],
     queryFn: () =>
-      fetch("http://localhost:5000/api/billing-list").then((response) =>
-        response.json()
-      ),
+      fetch(
+        `http://localhost:5000/api/billing-list?page=${page}$size=${size}`
+      ).then((response) => response.json()),
   });
+
+  const bills = data?.bills;
+  const count = data?.count;
+
+  useEffect(() => {
+    setBill(bills);
+    setBillCount(count);
+  }, [bills, count]);
+
+  const pages = Math.ceil(count / size);
+
   return (
     <div>
       <div className="flex justify-between items-center mx-12 border-1 p-2 mt-20 rounded-sm bg-slate-100">
@@ -52,7 +68,7 @@ const PayBillTable = () => {
               </tr>
             </thead>
             <tbody>
-              {billingList.map((singleBill, ind) => (
+              {bills?.map((singleBill, ind) => (
                 <BillingList
                   bill={singleBill}
                   key={singleBill._id}
@@ -62,6 +78,26 @@ const PayBillTable = () => {
               ))}
             </tbody>
           </table>
+          <div className="text-center my-10 design">
+            {pages &&
+              [...Array(pages).keys()].map((number) => (
+                <button
+                  key={number}
+                  className={`badge badge-lg mr-2 ${
+                    number === page && "selected"
+                  }`}
+                  onClick={() => setPage(number)}
+                >
+                  {number}
+                </button>
+              ))}
+            <select onChange={(event) => setSize(event.target.value)}>
+              <option value="5">5</option>
+              <option value="10" selected>
+                10
+              </option>
+            </select>
+          </div>
         </div>
       </div>
     </div>

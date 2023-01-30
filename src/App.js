@@ -5,7 +5,7 @@ import NotFound from "./Components/NotFound/NotFound";
 import Main from "./Layout/Main";
 import Login from "./Components/Login/Login";
 import Register from "./Components/Register/Register";
-import toast, { Toaster } from "react-hot-toast";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   const router = createBrowserRouter([
@@ -13,7 +13,8 @@ function App() {
       path: "/",
       element: <Main />,
       children: [
-        { path: "/", element: <Home /> },
+        { path: "/", element: <Register /> },
+        { path: "/h", element: <Home /> },
         { path: "/login", element: <Login /> },
         { path: "/register", element: <Register /> },
         { path: "*", element: <NotFound /> },
@@ -23,7 +24,8 @@ function App() {
   return (
     <div className="">
       <RouterProvider router={router}>
-        <Toaster />
+        {" "}
+        <Toaster />;
       </RouterProvider>
     </div>
   );

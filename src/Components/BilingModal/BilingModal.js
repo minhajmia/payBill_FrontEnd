@@ -30,7 +30,6 @@ const BilingModal = () => {
       .catch((error) => {
         console.error("Error:", error);
       });
-    console.log(data);
   };
   return (
     <div>

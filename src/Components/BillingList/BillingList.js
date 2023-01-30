@@ -1,4 +1,5 @@
 import React from "react";
+import UpdateBillInfo from "../UpdateBillInfo/UpdateBillInfo";
 
 const BillingList = ({ bill: singleBill, ind, refetch }) => {
   const { fullName, phone, email, amount } = singleBill;
@@ -34,8 +35,15 @@ const BillingList = ({ bill: singleBill, ind, refetch }) => {
         <td>{phone}</td>
         <td>{amount}</td>
         <td>
-          <button onClick={() => handleUpdate(singleBill._id)}>Edit</button> |{" "}
-          <button onClick={() => handleDelete(singleBill._id)}>Delete</button>{" "}
+          <label
+            onClick={() => handleUpdate(singleBill._id)}
+            htmlFor="my-modal-3"
+            className="btn"
+          >
+            Edit
+            <UpdateBillInfo singleBill={singleBill} />
+          </label>
+          | <button onClick={() => handleDelete(singleBill._id)}>Delete</button>{" "}
         </td>
       </tr>
     </>

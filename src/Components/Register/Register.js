@@ -29,7 +29,7 @@ const Register = () => {
         console.log(data);
         if (data.acknowledged) {
           toast.success("Registration Successful");
-          navigate("/");
+          navigate("/h");
         }
       });
   };

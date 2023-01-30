@@ -1,19 +1,34 @@
-import React from "react";
+import React, { createContext, useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
+export const UserContext = createContext();
 const Login = () => {
+  const [user, setUser] = useState(false);
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  // Register
-  const handleLogin = (data) => {
-    console.log(data);
-  };
+  console.log(user);
+  const navigate = useNavigate();
 
+  // Login
+  const handleLogin = (data) => {
+    const email = data.email;
+    fetch(`http://localhost:5000/api/login?email=${email}`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (!data?.email) {
+          alert("Please Register");
+        }
+        setUser(true);
+      })
+      .catch((err) => {
+        alert(`${err.message} . Please Register `);
+      });
+  };
   return (
     <div className="hero min-h-screen bg-base-200">
       <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
